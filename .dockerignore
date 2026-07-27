@@ -1,0 +1,7 @@
+frontend/
+data/
+.git/
+.gitignore
+README.md
+docker-compose.yml
+session_summary.md
