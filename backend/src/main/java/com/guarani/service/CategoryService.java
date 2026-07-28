@@ -16,15 +16,15 @@ public class CategoryService {
     private final CategoryRepository categoryRepository;
 
     public List<CategoryDTO> getAllCategories() {
-        List<Category> categories = categoryRepository.findAllByOrderByNameAsc();
-        return categories.stream()
-                .map(cat -> new CategoryDTO(
-                        cat.getId(),
-                        cat.getName(),
-                        cat.getIcon(),
-                        cat.getDescription(),
-                        cat.getWords().size()
-                ))
-                .collect(Collectors.toList());
+        List<Object[]> rows = categoryRepository.findAllWithWordCount();
+        return rows.stream()
+            .map(row -> new CategoryDTO(
+                (Long) row[0],
+                (String) row[1],
+                (String) row[2],
+                (String) row[3],
+                (Integer) row[4]
+            ))
+            .collect(Collectors.toList());
     }
 }

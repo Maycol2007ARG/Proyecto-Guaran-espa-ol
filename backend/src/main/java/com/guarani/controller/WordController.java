@@ -10,7 +10,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/words")
@@ -19,6 +21,15 @@ public class WordController {
 
     private final WordService wordService;
     private final HistoryService historyService;
+
+    @GetMapping
+    public ResponseEntity<Map<String, Object>> getAllWords(
+            @RequestParam(required = false) Integer limit) {
+        Map<String, Object> response = new HashMap<>();
+        long total = wordService.countAll();
+        response.put("total", total);
+        return ResponseEntity.ok(response);
+    }
 
     @GetMapping("/search")
     public ResponseEntity<WordSearchResult> searchWords(

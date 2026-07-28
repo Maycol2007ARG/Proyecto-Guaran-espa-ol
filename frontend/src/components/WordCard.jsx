@@ -31,6 +31,8 @@ export default function WordCard({ word, isFavorited, onToggleFavorite }) {
     return dots
   }
 
+  const difficulty = word.difficultyLevel || word.difficulty || 1
+
   return (
     <Link
       to={`/word/${word.id}`}
@@ -68,11 +70,11 @@ export default function WordCard({ word, isFavorited, onToggleFavorite }) {
       </div>
 
       <div className="flex items-center space-x-1.5 mt-3">
-        {getDifficultyDots(word.difficulty)}
+        {getDifficultyDots(difficulty)}
         <span className="text-xs text-gray-500 ml-1">
-          {word.difficulty === 1 && 'Principiante'}
-          {word.difficulty === 2 && 'Intermedio'}
-          {word.difficulty === 3 && 'Avanzado'}
+          {difficulty === 1 && 'Principiante'}
+          {difficulty === 2 && 'Intermedio'}
+          {difficulty === 3 && 'Avanzado'}
         </span>
       </div>
     </Link>

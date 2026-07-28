@@ -56,6 +56,10 @@ public class WordService {
         return wordRepository.findByIdIn(ids);
     }
 
+    public long countAll() {
+        return wordRepository.countAll();
+    }
+
     public WordDTO mapToDTO(Word word) {
         List<String> categoryNames = word.getCategories().stream()
                 .map(cat -> cat.getName())

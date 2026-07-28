@@ -34,4 +34,7 @@ public interface WordRepository extends JpaRepository<Word, Long> {
 
     @Query("SELECT w FROM Word w ORDER BY FUNCTION('RANDOM') LIMIT 1")
     Word findRandomWord();
+
+    @Query("SELECT COUNT(w) FROM Word w")
+    long countAll();
 }
